@@ -1,0 +1,20 @@
+version: "3.3"
+   
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
+  web:
+    build: .
+    environment:  
+      - DATABASE=postgres
+      - ENV_TYPE=production
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
